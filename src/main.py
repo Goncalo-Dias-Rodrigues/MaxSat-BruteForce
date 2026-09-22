@@ -9,29 +9,22 @@ def print_hi(name):
                 pass
             elif line.startswith("p"):
                 information = line.split()
-                print(f"Number of variables: {information[2]}")
-                print(f"Number of Clauses: {information[3]}")
             elif not line.startswith("%"):
                 clauses += line.split("0\n")
-    # clauses.remove("")
-    print(information[1])
-    print(clauses[0])
-    print(clauses[1])
-    print(clauses[2])
-    print(clauses[3])
 
-    formated_clauses = [len(clauses)]
+    formatted_information = information
+    formatted_information[2] = int(formatted_information[2])
+    formatted_information[3] = int(formatted_information[3])
 
-    for i in range(len(clauses)):
-        if not i % 2 == 0:
-            formated_clauses += clauses[i]
+    formatted_clauses = clauses[1::2]
+    formatted_clauses = [[int(x) for x in s.split()] for s in formatted_clauses]
+    formatted_clauses.pop(len(formatted_clauses) - 1)
+    formatted_clauses.pop(len(formatted_clauses) - 1)
 
-    for index in range(len(clauses)):
-        if not index % 2 == 0:
-            print(clauses)
-
-
-
+    print(f"Number of variables: {formatted_information[2]}")
+    print(f"Number of Clauses: {formatted_information[3]}")
+    print(formatted_information)
+    print(formatted_clauses)
 
 if __name__ == '__main__':
     print_hi('PyCharm')
