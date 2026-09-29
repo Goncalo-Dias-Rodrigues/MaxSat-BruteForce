@@ -1,3 +1,4 @@
+
 import random
 
 
@@ -8,10 +9,10 @@ class MaxSat:
 
     def __init__(self, info, clauses):
         """
-            Stores the information and clauses in the class;
-            Creates an array space for the variables;
-            Creates a String to store the current solution hypothesis(starting with all zeros);
-            Fills the variable array with the correspondent boolean values.
+        Stores the information and clauses in the class;
+        Creates an array space for the variables;
+        Creates a String to store the current solution hypothesis(starting with all zeros);
+        Fills the variable array with the correspondent boolean values.
         :param info: Information from the header of the file
         :param clauses: Every clause from the formula with the respective index and polarity of each variable
         """
@@ -27,8 +28,7 @@ class MaxSat:
         Fills the variable array with the values from the current hypothesis (0 -> False, 1 -> True).
         """
         for i in range(self.information[2]):
-            hypotheses_value = self.current_binary_hypotheses[i]
-            if hypotheses_value == "0":
+            if self.current_binary_hypotheses[i] == "0":
                 self.variables.append(False)
             else:
                 self.variables.append(True)
@@ -53,14 +53,15 @@ class MaxSat:
         best_hypotheses = []
         for index in range(len(results)):
             current_result = results[index].count(True)
-            if current_result > best_result:
-                best_result = current_result
-                if not current_result == self.information[3]:
-                    best_hypotheses.append(hypothesis[index])
-                else:
-                    best_hypotheses.clear()
             if current_result == self.information[3]:
+                if not best_result == self.information[3]:
+                    best_hypotheses.clear()
+                best_result = current_result
                 best_hypotheses.append(hypothesis[index])
+            elif current_result >= best_result:
+                if not current_result == best_result:
+                    best_hypotheses.clear()
+                best_result = current_result
         return best_result, best_hypotheses
 
     def calculate_hypotheses(self):
@@ -97,18 +98,11 @@ class MaxSat:
         :param clause: Clause that will be analysed
         :return: True if at least 1 True exists, false otherwise
         """
-        boolean_value = []
         for value in clause:
             if value - 1 >= 0:
-                boolean_value.append(self.variables[value-1])
+                if self.variables[value-1]:
+                    return True
             else:
-                boolean_value.append(not self.variables[abs(value) - 1])
-        return boolean_value.__contains__(True)
-
-    def fill_variables_with_random_values(self):
-        for i in range(self.information[2]):
-            random_value = random.randint(0,1)
-            if random_value == 0:
-                self.variables.append(False)
-            else:
-                self.variables.append(True)
+                if not self.variables[abs(value) - 1]:
+                    return True
+        return False

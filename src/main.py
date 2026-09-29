@@ -18,7 +18,12 @@ if __name__ == '__main__':
     file_manager = FileManager()
 
     information, clauses = file_manager.get_info("files/20variables/uf20-01.cnf")
+    end = time.perf_counter()
 
+    file_time = end - start
+    print(f"Tempo de execução de leitura de ficheiros: {file_time:.6f} segundos")
+
+    start = time.perf_counter()
     max_sat = MaxSat(information, clauses)
 
     best_result, best_hypotheses = max_sat.evaluate()
