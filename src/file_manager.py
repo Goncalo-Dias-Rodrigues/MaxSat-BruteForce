@@ -4,6 +4,9 @@ class FileManager:
         pass
 
     def get_info(self, file_name):
+        """
+        Extracts and formats the data from any file of the same format as the DIMACS cnf format.
+        """
         information = []
         clauses = [[]]
 
