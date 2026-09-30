@@ -17,7 +17,8 @@ if __name__ == '__main__':
     start = time.perf_counter()
     file_manager = FileManager()
 
-    information, clauses = file_manager.get_info("files/20variables/uf20-01.cnf")
+    # information, clauses = file_manager.get_info("files/20variables/uf20-01.cnf")
+    information, clauses = file_manager.get_info("files/hoos.cnf")
     end = time.perf_counter()
 
     file_time = end - start
