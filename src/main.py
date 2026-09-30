@@ -21,7 +21,6 @@ if __name__ == '__main__':
     end = time.perf_counter()
 
     file_time = end - start
-    print(f"Tempo de execução de leitura de ficheiros: {file_time:.6f} segundos")
 
     start = time.perf_counter()
     max_sat = MaxSat(information, clauses)
@@ -31,12 +30,14 @@ if __name__ == '__main__':
     end = time.perf_counter()
 
     time = end - start
-    print(f"Tempo de execução: {time:.6f} segundos")
+    print(f"Tempo de execução de leitura de ficheiros: {file_time:.6f} segundos")
+    print(f"Tempo de execução do algoritmo: {time:.6f} segundos")
+    print(f"Number of variables: {information[2]}")
+    print(f"Number of Clauses: {information[3]}")
     print(f"Best Result: {best_result}")
     print(f"Best Hypothesis: {best_hypotheses}")
 
-    print(f"Number of variables: {information[2]}")
-    print(f"Number of Clauses: {information[3]}")
+
     # print(information)
     # print(clauses)
 
