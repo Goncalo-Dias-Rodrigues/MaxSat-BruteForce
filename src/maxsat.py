@@ -6,10 +6,8 @@ class MaxSat:
 
     def __init__(self, info, clauses):
         """
-        Stores the information and clauses in the class;
-        Creates an array space for the variables;
-        Creates a String to store the current solution hypothesis(starting with all zeros);
-        Fills the variable array with the correspondent boolean values.
+        Initializes the MaxSat instance with the problem information and clauses;
+        Creates the variables array with all variables initialized to False.
         :param info: Information from the header of the file
         :param clauses: Every clause from the formula with the respective index and polarity of each variable
         """
@@ -46,7 +44,8 @@ class MaxSat:
 
     def evaluate(self):
         """
-        Evaluates all the results and hypotheses
+        Evaluates all possible hypotheses and stores the ones that satisfy the maximum number of clauses;
+        Stops keeping previous hypotheses when a better result is found.
         :return: Best number of clauses that form a True and all the best hypotheses that achieve that number
         """
         best_result = -1
@@ -84,9 +83,9 @@ class MaxSat:
 
     def calculate_result(self, clause):
         """
-        Calculates the result of a specific clause; While doing this it applies the inversion operator with indexes
-        that are negative in the clause; Knowing that inside the clause are only "or" operators we only need to
-        know that at least 1 True exists.
+        Calculates the result of a specific clause by evaluating each variable according to its polarity;
+        Since all variables inside a clause are connected by "or" operators, the clause is True as soon as at least one
+        literal evaluates to True.
         :param clause: Clause that will be analysed
         :return: True if at least 1 True exists, false otherwise
         """
